@@ -1,0 +1,40 @@
+main {
+  min-height: 80vh;
+}
+
+h1 {
+  font-size: 1.8rem;
+  padding: 1rem 0;
+}
+
+h2 {
+  font-size: 1.4rem;
+  padding: 0.5rem 0;
+}
+
+h3 {
+  padding: 1rem 0;
+}
+
+header .fa-user, .fa-shopping-cart {
+  color: white;
+  transition: 0.3s;
+  padding: 10px;
+}
+
+header .fa-user:hover, .fa-shopping-cart:hover {
+  color: orange;
+}
+
+.qty {
+  color: orange;
+  font-weight: bold;
+}
+
+/* .rating span {
+  margin: 0.1rem;
+} */
+
+/* .fa-star, .fa-star-half-alt {
+  color: orange;
+} */

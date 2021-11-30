@@ -16,19 +16,24 @@ h3 {
   padding: 1rem 0;
 }
 
-header .fa-user, .fa-shopping-cart {
+header .fa-user, .fa-shopping-cart, .fa-arrow-alt-circle-right, .fa-grin {
+  cursor: pointer;
   color: white;
   transition: 0.3s;
   padding: 10px;
 }
 
-header .fa-user:hover, .fa-shopping-cart:hover {
+header .fa-user:hover, .fa-shopping-cart:hover, .fa-arrow-alt-circle-right:hover, .fa-grin:hover {
   color: orange;
 }
 
 .qty {
   color: orange;
   font-weight: bold;
+}
+
+.dang {
+  color: tomato;
 }
 
 /* .rating span {

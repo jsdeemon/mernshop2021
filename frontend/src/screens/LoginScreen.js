@@ -8,6 +8,8 @@ import Loader from '../components/Loader'
 import FormContainer from '../components/FormContainer'
 // actions
 import { login } from '../actions/userActions'
+// validator 
+import { inputValidator } from '../utils/inputValidator'
 
 const LoginScreen = () => {
 
@@ -60,6 +62,9 @@ const LoginScreen = () => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     ></Form.Control>
+                     {
+                        inputValidator('Email', email, 4, 'dang')
+                    }
                 </Form.Group>
 
                 <Form.Group controlId="password">
@@ -70,11 +75,17 @@ const LoginScreen = () => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     ></Form.Control>
+                    {
+                        inputValidator('Password', password, 6, 'dang')
+                    }
                 </Form.Group>
 
                 <Button
                 type='submit'
                 variant='primary'
+                  disabled={ (email.length <= 4) || (password.length <= 6) }
+               //  disabled={ disableButtonValidator({emaili: 4, password: 6}) }
+             //   disabled={false}
                 >
                     Sign In
                 </Button>

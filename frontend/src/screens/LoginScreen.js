@@ -81,6 +81,7 @@ const LoginScreen = () => {
                 </Form.Group>
 
                 <Button
+                className={'signInButton'}
                 type='submit'
                 variant='primary'
                   disabled={ (email.length <= 4) || (password.length <= 6) }

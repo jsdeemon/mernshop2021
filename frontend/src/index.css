@@ -36,6 +36,10 @@ header .fa-user:hover, .fa-shopping-cart:hover, .fa-arrow-alt-circle-right:hover
   color: tomato;
 }
 
+.signInButton {
+  margin-top: 10px;
+}
+
 /* .rating span {
   margin: 0.1rem;
 } */

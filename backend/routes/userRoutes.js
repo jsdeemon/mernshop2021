@@ -4,7 +4,8 @@ const router = express.Router()
 // import controllers 
 import { authUser,
     getUserProfile,
-    registerUser
+    registerUser,
+    updateUserProfile
  } from '../controllers/userController.js';
 
  import { protect } from '../middleware/authMiddleware.js';
@@ -15,7 +16,7 @@ import { authUser,
 // auth user
 router.post('/login', authUser)
 // get user profile
-router.route('/profile').get(protect, getUserProfile)
+router.route('/profile').get(protect, getUserProfile).put(protect, updateUserProfile)
 
 
 

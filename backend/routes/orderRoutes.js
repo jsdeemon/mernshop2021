@@ -3,7 +3,8 @@ const router = express.Router()
 
 // import controllers 
 import { 
-    addOrderItems
+    addOrderItems,
+    getOrderById
  } from '../controllers/orderController.js';
 
  import { protect } from '../middleware/authMiddleware.js';
@@ -11,6 +12,8 @@ import {
 
  // add order
  router.route('/').post(protect, addOrderItems)
+// select order by id 
+router.route('/:id').get(protect, getOrderById)
 
 
 

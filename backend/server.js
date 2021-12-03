@@ -10,6 +10,7 @@ import connectDB from './config/db.js';
 // routes
 import productRoutes from './routes/productRoutes.js'; 
 import userRoutes from './routes/userRoutes.js';
+import orderRoutes from './routes/orderRoutes.js';
 
 // import products from './data/products.js';
 
@@ -33,6 +34,9 @@ app.use("/api/products", productRoutes)
 
 // use User routes 
 app.use("/api/users", userRoutes)
+
+// use Order routes
+app.use("/api/orders", orderRoutes)
 
 // not found
 app.use(notFound)

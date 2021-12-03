@@ -10,11 +10,13 @@ import FormContainer from '../components/FormContainer'
 import { login } from '../actions/userActions'
 // validator 
 import { inputValidator } from '../utils/inputValidator'
+import { SHOULD_LOGIN } from '../constants/messageConstants'
 
 const LoginScreen = () => {
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [msg, setMsg] = useState('')
 
 
     const dispatch = useDispatch() 
@@ -28,17 +30,25 @@ const LoginScreen = () => {
     const navigate = useNavigate()
 
 
+
+
     let registerLink = '/register'; 
     if (redirect) {
         registerLink = `/register?redirect=${redirect}`
     }
+
+    // console.log(redirect)
+   
  
 
     useEffect(() => {
+        if (redirect === SHOULD_LOGIN) {
+            setMsg('You should login first')
+        }
         if(userInfo) {
             navigate(redirect)
         }
-    }, [navigate, userInfo, redirect])
+    }, [navigate, userInfo, redirect, msg])
 
     const submitHandler = (e) => {
         e.preventDefault()
@@ -51,6 +61,7 @@ const LoginScreen = () => {
         <FormContainer>
             <h1>Sign In</h1>
             {error && <Message variant='danger'>{error}</Message>}
+            {msg && <Message variant='warning'>{msg}</Message>}
             {loading && <Loader />}
             <Form onSubmit={submitHandler}>
 

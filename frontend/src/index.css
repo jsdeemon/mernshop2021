@@ -36,7 +36,7 @@ header .fa-user:hover, .fa-shopping-cart:hover, .fa-arrow-alt-circle-right:hover
   color: tomato;
 }
 
-.signInButton {
+.signInButton, .btn-shipping {
   margin-top: 10px;
 }
 

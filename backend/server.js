@@ -38,6 +38,9 @@ app.use("/api/users", userRoutes)
 // use Order routes
 app.use("/api/orders", orderRoutes)
 
+// PayPal config 
+app.get('/api/config/paypal', (req, res) => res.send(process.env.PAYPAL_CLIENT_ID))
+
 // not found
 app.use(notFound)
 

@@ -1,9 +1,19 @@
 import Rating from './Rating';
-import {Card} from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import {Card, Button} from 'react-bootstrap';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 const Product = ({product}) => {
+
+
+    // adding history 
+    const navigate = useNavigate()
+    // Add to cart hndler 
+    const addToCartHandler = () => {
+
+       navigate(`/cart/${product._id}?qty=1`)
+    }
+
     return (
         <Card className="my-3 p-3 rounded">
           <Link to={`/product/${product._id}`} >
@@ -27,6 +37,11 @@ const Product = ({product}) => {
           <Card.Text as='h3'> 
           $ {product.price}
           </Card.Text>
+          <Button 
+          className={'btn-md'}
+          onClick={addToCartHandler}
+          disabled={product.countInStock === 0}
+          variant="dark"><i className={'fas fa-shopping-cart'}></i>.Add to cart</Button>
 </Card.Body>
 
         </Card>

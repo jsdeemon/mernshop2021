@@ -5,7 +5,8 @@ const router = express.Router()
 import { 
     addOrderItems,
     getOrderById,
-    updateOrderToPaid
+    updateOrderToPaid,
+    getMyOrders
  } from '../controllers/orderController.js';
 
  import { protect } from '../middleware/authMiddleware.js';
@@ -13,10 +14,13 @@ import {
 
  // add order
  router.route('/').post(protect, addOrderItems)
-// select order by id 
-router.route('/:id').get(protect, getOrderById)
+
 
 // payment route - PayPal
 router.route('/:id/pay').put(protect, updateOrderToPaid)
 
+// get all orders
+router.route('/myorders').get(protect, getMyOrders)
+// select order by id 
+router.route('/:id').get(protect, getOrderById)
 export default router; 

@@ -48,7 +48,7 @@ const OrderScreen = () => {
 
     useEffect(() => {
 
-        // adding Paypal script 
+     //   adding Paypal script 
         const addPayPalScript = async () => {
             const { data: clientId } = await axios.get('/api/config/paypal') 
             const script = document.createElement('script') 
@@ -61,7 +61,7 @@ const OrderScreen = () => {
             document.body.appendChild(script)
         }
 
-        // if paypal payment is success 
+      //  if paypal payment is success 
         if(!order || successPay) {
             dispatch({type: ORDER_PAY_RESET})
             dispatch(getOrderDetails(orderId))
@@ -84,6 +84,11 @@ const OrderScreen = () => {
         console.log(paymentResult)
         dispatch(payOrder(orderId, paymentResult))
     }
+
+    // const payWithoutPaypalHandler = (paymentResult) {
+    //     console.log(paymentResult)
+    //     dispatch(payOrder(orderId, paymentResult))
+    // }
 
 
     return loading ? <Loader /> : error ? <Message variant='danger'>{error}</Message> : <> 
@@ -190,7 +195,7 @@ const OrderScreen = () => {
                                 </ListGroup.Item>
                             )}
 
-
+{/* <button onclick={payWithoutPaypalHandler}>Pay without paypal test</button> */}
                         </ListGroup>
                     </Card>
                 </Col>

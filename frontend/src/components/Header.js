@@ -1,17 +1,24 @@
 // import {LinkContainer} from 'react-router-bootstrap'
 import {useEffect} from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import {Navbar,
+  Button,
    Nav, 
-   Container 
+   Container,
+   Dropdown 
   } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+
 // actions
 import { logout } from '../actions/userActions';
 
 
 
+
 const Header = () => {
+
+
+  const navigate = useNavigate()
 
   const dispatch = useDispatch()
   //getting user info 
@@ -20,6 +27,7 @@ const Header = () => {
 
   const logoutHandler = () => {
     dispatch(logout())
+    navigate('/')
   }
 
 // getting quantity of ordered goods
@@ -28,12 +36,12 @@ const cart = useSelector(state => state.cart)
 const { cartItems } = cart
 const qtyAll = cartItems.reduce((acc, item) => acc + item.qty, 0)
 
-// console.log('qty: ', qty);
-  useEffect(() => {
+
+  // useEffect(() => {
     
   
 
-  }, [])
+  // }, [navigate])
 
     return (
         <header>
@@ -49,36 +57,51 @@ const qtyAll = cartItems.reduce((acc, item) => acc + item.qty, 0)
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto">
            
-                  <Link to='/cart'>
-                  <i className="fas fa-shopping-cart" style={{ }}> Cart&nbsp;
-                  {qtyAll ? <sup className="qty">{qtyAll}</sup> : ''}
-                  </i> 
+                  {/* <Link to='/cart'>
+                    <Button variant={''} className={'btn-sm'}><i className="fas fa-shopping-cart" style={{ }}> &nbsp;
+                  
+                  </i> Cart{qtyAll ? <sup className="qty">{qtyAll}</sup> : ''}</Button></Link> */}
+
+              
+                
+                  <Link to={'/cart'}>
+                  
+  <i className="fas fa-shopping-cart" style={{ }}> Cart{qtyAll ? <sup className="qty">{qtyAll}</sup> : ''}</i> 
+  
+  </Link>
+  
+
+  {userInfo && userInfo.isAdmin && (
+                  <>
+                   <Link to='/admin/userlist'>
+                  <i className="fas fa-users"> Users</i> 
                   </Link>
+                  <Link to='/admin/productlist'>
+                  <i className="fas fa-list"> Products</i> 
+                  </Link>
+                  <Link to='/admin/orderlist'>
+                  <i className="fas fa-list-alt"> Orders</i> 
+                  </Link>
+                  </>
+                  )}
 
                   { userInfo ? (
-                    <div>
-                   <Link to='/profile'>
-                       <i className="far fa-grin"> {userInfo.name}</i> 
-                   </Link>
-                   
-                    <i className="far fa-arrow-alt-circle-right"
-                    onClick={logoutHandler}
-                    > Logout</i> 
-                
-                </div>
+        <>
+                        <Link to='/profile'>
+                      <i className="far fa-grin"> {userInfo.name}</i> 
+                      </Link>
+                      <i className="far fa-arrow-alt-circle-right" onClick={logoutHandler}> Logout</i>
+                      </>
                   ) : (
                     <Link to='/login'>
                   <i className="fas fa-user"> Sign In</i> 
                   </Link>
+                
                   ) }
 
-               
                  
-              
 
-              {/* <Link to="/login">
-              <Nav.Link><i className="fas fa-user"></i> Sign In</Nav.Link>
-              </Link> */}
+   
              
             </Nav>
           </Navbar.Collapse>

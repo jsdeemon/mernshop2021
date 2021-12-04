@@ -5,14 +5,15 @@ const router = express.Router()
 import { authUser,
     getUserProfile,
     registerUser,
-    updateUserProfile
+    updateUserProfile,
+    getUsers
  } from '../controllers/userController.js';
 
- import { protect } from '../middleware/authMiddleware.js';
+ import { protect, admin } from '../middleware/authMiddleware.js';
 
 
- // register user 
- router.route('/').post(registerUser)
+ // register user and get all users (for admon)
+ router.route('/').post(registerUser).get(protect, admin, getUsers)
 // auth user
 router.post('/login', authUser)
 // get user profile

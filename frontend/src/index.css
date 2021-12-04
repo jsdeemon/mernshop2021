@@ -16,7 +16,10 @@ h3 {
   padding: 1rem 0;
 }
 
-header .fa-user, .fa-shopping-cart, .fa-arrow-alt-circle-right, .fa-grin {
+
+
+
+header .fa-user, .fa-users, .fa-shopping-cart, .fa-arrow-alt-circle-right, .fa-grin, .fa-list, .fa-list-alt {
   cursor: pointer;
   color: white;
   transition: 0.3s;
@@ -26,6 +29,19 @@ header .fa-user, .fa-shopping-cart, .fa-arrow-alt-circle-right, .fa-grin {
 header .fa-user:hover, .fa-shopping-cart:hover, .fa-arrow-alt-circle-right:hover, .fa-grin:hover {
   color: orange;
 }
+
+.fa-users:hover {
+  color: orange;
+}
+
+.fa-list:hover {
+  color: orange;
+}
+
+.fa-list-alt:hover {
+  color: orange;
+} 
+
 
 .qty {
   color: orange;

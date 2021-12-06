@@ -5,11 +5,21 @@ const router = express.Router()
 // import Product from '../models/productModel.js';
 
 // import controllers 
-import { getProducts, getProductById } from '../controllers/productController.js'
+import { getProducts, 
+    getProductById, 
+    deleteProduct, 
+    updateProduct, 
+    createProduct} from '../controllers/productController.js'
+// import middleware for protection 
+import { protect, admin } from '../middleware/authMiddleware.js'
+
 
 // getting all products
-router.route('/').get(getProducts)
+router.route('/').get(getProducts).post(protect, admin, createProduct)
+
 router.route('/:id').get(getProductById)
+.delete(protect, admin, deleteProduct)
+.put(protect, admin, updateProduct)
 
 // @desc    fetch all products
 // @route   GET /api/products

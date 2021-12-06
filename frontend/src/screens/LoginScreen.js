@@ -46,7 +46,7 @@ const LoginScreen = () => {
             setMsg('You should login first')
         }
         if(userInfo) {
-            navigate(redirect)
+            navigate('/')
         }
     }, [navigate, userInfo, redirect, msg])
 
@@ -106,7 +106,7 @@ const LoginScreen = () => {
             <Row className='py-3'>
                 <Col>
                 New Customer?{' '}
-                <Link to={ registerLink }>Register</Link>
+                <Link to={ '/register' }>Register</Link>
                 </Col>
             </Row>
         </FormContainer>

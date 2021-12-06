@@ -59,6 +59,7 @@ console.log(user);
 
             setName(user.name)
         }
+        document.title = `${user.name} profile`
     }, [dispatch, navigate, userInfo, user, orders])
 
     const submitHandler = (e) => {

@@ -7,11 +7,19 @@ import Message from '../components/Message'
 import Loader from '../components/Loader'
 // actions
 import { listUsers, deleteUser } from '../actions/userActions'
+// constants 
+import { SUCCESS_UPDATE } from '../constants/messageConstants'
+
 
 const UserListScreen = () => {
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const location = useLocation()
+
+
+    const [msg, setMsg] = useState('')
+    const gotMessage = location.search ? location.search.split('=')[1] : ''
 
     const userList = useSelector(state => state.userList)
     const { loading, error, users } = userList
@@ -24,13 +32,16 @@ const UserListScreen = () => {
     const { success:successDelete } = userDelete
 
     useEffect(() => {
+        if (gotMessage === SUCCESS_UPDATE) {
+            setMsg('User was successfully updated ')
+        }
         if(userInfo && userInfo.isAdmin) {
             dispatch(listUsers())
         } else {
             navigate('/login')
         }
-       
-    }, [dispatch, userInfo, navigate, successDelete]) 
+        document.title = 'User list'
+    }, [dispatch, userInfo, navigate, successDelete, gotMessage]) 
 
 const deleteHandler = (id) => {
     if(window.confirm('Are you sure?')) {
@@ -43,6 +54,7 @@ const deleteHandler = (id) => {
 
     return (
         <>
+        {msg && <Message variant='success'>{msg}</Message>}
         <h1>Users</h1>
         {loading ? <Loader /> : error ? <Message variant='danger'>{error}</Message> : (
         <Table striped bordered hover responsive className='table table-sm'>
@@ -66,7 +78,7 @@ const deleteHandler = (id) => {
                             {user.isAdmin ? (<i className='fas fa-check' style={{ color: 'green' }}></i>) : (<i className='fas fa-times' style={{ color: 'red' }}></i>) }
                         </td>
                         <td>
-                            <Link to={`/user/${user._id}/edit`}>
+                            <Link to={`/admin/user/${user._id}/edit`}>
                                 <Button variant='light' className='btn-sm'>
                                     <i className={'fas fa-edit'}></i>
                                 </Button>

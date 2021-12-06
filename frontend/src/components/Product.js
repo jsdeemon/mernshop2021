@@ -41,7 +41,7 @@ const Product = ({product}) => {
           className={'btn-md'}
           onClick={addToCartHandler}
           disabled={product.countInStock === 0}
-          variant="dark"><i className={'fas fa-shopping-cart'}></i>.Add to cart</Button>
+          variant="dark"><i className={'fas fa-shopping-cart'}> Add to cart</i></Button>
 </Card.Body>
 
         </Card>

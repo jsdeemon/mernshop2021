@@ -1,11 +1,14 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 import {Row, Col} from 'react-bootstrap';
 import Product from '../components/Product';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
 // action 
 import { listProducts } from '../actions/productActions'
+// message constants
+import { SUCCESS_REGISTER } from '../constants/messageConstants'
 // import axios from 'axios';
 // import products from '../products';
 
@@ -17,11 +20,15 @@ const dispatch = useDispatch();
 const productList = useSelector(state => state.productList) 
 const { loading, error, products } = productList
 
+const [msg, setMsg] = useState('')
     // const [products, setProducts] = useState([]);
-
+    const location = useLocation()
+    const redirect = location.search ? location.search.split('=')[1] : '/'
 
     useEffect(() => {
-
+        if (redirect === SUCCESS_REGISTER) {
+            setMsg('You successfully registered')
+        }
         dispatch(listProducts())
 
         document.title = 'All products'
@@ -32,12 +39,13 @@ const { loading, error, products } = productList
     //        setProducts(data);
     //    }
     //    fetchPproducts();
-    }, [dispatch])
+    }, [dispatch, redirect])
 
   
 
     return (
         <>
+          {msg && <Message variant='success'>{msg}</Message>}
             <h1>Latest Products</h1>
             {loading ? (
            <Loader />

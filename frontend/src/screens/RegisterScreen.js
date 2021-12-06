@@ -8,6 +8,8 @@ import Loader from '../components/Loader'
 import FormContainer from '../components/FormContainer'
 // actions
 import { register } from '../actions/userActions'
+// message constants
+import { SUCCESS_REGISTER } from '../constants/messageConstants'
 // input validator 
 import { inputValidator, comparePasswords } from '../utils/inputValidator'
 
@@ -25,23 +27,23 @@ const RegisterScreen = () => {
     const userRegister = useSelector(state => state.userRegister) 
     const { loading, error, userInfo } = userRegister
 
-    const location = useLocation()
-    const redirect = location.search ? location.search.split('=')[1] : '/'
+    // const location = useLocation()
+    // const redirect = location.search ? location.search.split('=')[1] : '/'
 
     const navigate = useNavigate()
 
 
-    let loginLink = '/login'; 
-    if (redirect) {
-        loginLink = `/login?redirect=${redirect}`
-    }
+    let loginLink = '/'; 
+    // if (redirect) {
+    //     loginLink = `/`
+    // }
  
 
     useEffect(() => {
         if(userInfo) {
-            navigate(redirect)
+            navigate('/')
         }
-    }, [navigate, userInfo, redirect])
+    }, [navigate, userInfo])
 
     const submitHandler = (e) => {
         e.preventDefault()
@@ -50,6 +52,7 @@ const RegisterScreen = () => {
         } else {
               // dispatch register
         dispatch(register(name, email, password))
+        navigate(`/?message=${SUCCESS_REGISTER}`)
         }
       
     }

@@ -6,14 +6,15 @@ import {
     addOrderItems,
     getOrderById,
     updateOrderToPaid,
-    getMyOrders
+    getMyOrders,
+    getOrders
  } from '../controllers/orderController.js';
 
- import { protect } from '../middleware/authMiddleware.js';
+ import { protect, admin } from '../middleware/authMiddleware.js';
 
 
- // add order
- router.route('/').post(protect, addOrderItems)
+ // add order, get all orders
+ router.route('/').post(protect, addOrderItems).get(protect, admin, getOrders)
 
 
 // payment route - PayPal

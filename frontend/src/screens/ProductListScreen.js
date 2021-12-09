@@ -6,8 +6,12 @@ import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 // actions
-import { listProducts, deleteProduct } from '../actions/productActions'
+import { 
+    listProducts,
+    deleteProduct,
+    createProduct } from '../actions/productActions'
 // constants 
+import { PRODUCT_CREATE_RESET } from '../constants/productConstants'
 import { SUCCESS_UPDATE } from '../constants/messageConstants'
 
 
@@ -28,27 +32,46 @@ const ProductListScreen = () => {
     const { loading:loadingDelete, error:errorDelete, success:successDelete } = productDelete
 
 
+    const productCreate = useSelector(state => state.productCreate)
+    const { loading:loadingCreate, 
+        error:errorCreate, 
+        success:successCreate,
+    product:createdProduct } = productCreate
+
+
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
 
 
 
     useEffect(() => {
+
+        dispatch({ type: PRODUCT_CREATE_RESET })
+
         if (successDelete) {
 
                 setMsg('Product was deleted')
          
         }
       
-        if(userInfo && userInfo.isAdmin) {
-            dispatch(listProducts())
+        if(!userInfo.isAdmin) {
+            navigate('/login')  
+        }
+
+        if (successCreate) {
+            navigate(`/admin/product/${createdProduct._id}/edit`)
         } else {
-            navigate('/login')
+            dispatch(listProducts)
         }
 
         document.title = 'Product list'
        
-    }, [dispatch, userInfo, navigate, successDelete]) 
+    }, [dispatch,
+         userInfo, 
+         navigate, 
+         successDelete, 
+         successCreate, 
+         createdProduct]) 
 
 const deleteHandler = (id) => {
     if(window.confirm('Are you sure?')) {
@@ -58,15 +81,17 @@ const deleteHandler = (id) => {
  
 }
 
-const createProductHandler = (product) => {
+const createProductHandler = () => {
     // CREATE PRODUCT
+    dispatch(createProduct())
+
 }
 
 
 
     return (
         <>
-        {/* {msg && setTimeout(() => <Message variant='success'>{msg}</Message>, 2000)} */}
+        
 
         <Row className='align-items-center'>
             <Col>
@@ -84,7 +109,10 @@ const createProductHandler = (product) => {
 
        {loadingDelete && <Loader />}
        {errorDelete && <Message variant='danger'>{errorDelete}</Message>}
-       {successDelete && <Message variant='success'>{'Product was deleted'}</Message>}
+       {/* {successDelete && <Message variant='success'>{'Product was deleted'}</Message>} */}
+
+       {loadingCreate && <Loader />}
+       {errorCreate && <Message variant='danger'>{errorCreate}</Message>}
 
         {loading ? <Loader /> : error ? <Message variant='danger'>{error}</Message> : (
         <Table striped bordered hover responsive className='table table-sm'>

@@ -52,6 +52,7 @@ console.log(user);
             if (!user.name) {
                 dispatch(getUserDetails('profile'))
                 dispatch(listMyOrders())
+                console.log(orders)
             } else {
                 setName(user.name)
                 setEmail(user.email)
@@ -60,7 +61,7 @@ console.log(user);
             setName(user.name)
         }
         document.title = `${user.name} profile`
-    }, [dispatch, navigate, userInfo, user, orders])
+    }, [dispatch, navigate, userInfo, user, orderListMy])
 
     const submitHandler = (e) => {
         e.preventDefault()

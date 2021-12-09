@@ -1,3 +1,4 @@
+import path from 'path';
 // const express = require('express');
 import express from 'express'; 
 import dotenv from 'dotenv';
@@ -11,6 +12,7 @@ import connectDB from './config/db.js';
 import productRoutes from './routes/productRoutes.js'; 
 import userRoutes from './routes/userRoutes.js';
 import orderRoutes from './routes/orderRoutes.js';
+import uploadRoutes from './routes/uploadRoutes.js';
 
 // import products from './data/products.js';
 
@@ -38,8 +40,15 @@ app.use("/api/users", userRoutes)
 // use Order routes
 app.use("/api/orders", orderRoutes)
 
+// use Upload routes 
+app.use('/api/upload', uploadRoutes)
+
 // PayPal config 
 app.get('/api/config/paypal', (req, res) => res.send(process.env.PAYPAL_CLIENT_ID))
+
+// making upload folder static 
+const __dirname = path.resolve()
+app.use('/uploads', express.static(path.join(__dirname, '/uploads')))
 
 // not found
 app.use(notFound)

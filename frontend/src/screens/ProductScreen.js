@@ -7,6 +7,7 @@ import { Row, Col, Image, ListGroup, Card, Button, Form} from 'react-bootstrap';
 import Rating from '../components/Rating';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
+import Meta from '../components/Meta';
 // action 
 import { listProductDetails, 
     createProductReview } from '../actions/productActions'
@@ -82,6 +83,10 @@ const {success:successProductReview, error:errorProductReview } = productReviewC
 // console.log(product);
     return (
         <>
+        <Meta 
+        title={product.name}
+        description={product.description}
+        />
           <Link className={'btn btn-light my-3'} to='/'>
               Go back
           </Link>

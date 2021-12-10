@@ -29,6 +29,7 @@ function App() {
         <Routes>
         {/* <Route exact path="/" component={HomeScreen} /> */}
         <Route path='/' element={<HomeScreen/>} />
+        <Route path='/page/:pagenumber' element={<HomeScreen/>} />
         <Route path='/search/:keyword' element={<HomeScreen/>} />
         <Route path='product/:id' element={<ProductScreen/>} />
         <Route path='cart' element={<CartScreen/>} />
@@ -42,7 +43,8 @@ function App() {
         <Route path='order/:id' element={<OrderScreen/>} />
         <Route path='admin/userlist' element={<UserListScreen/>} />
         <Route path='admin/user/:id/edit' element={<UserEditScreen/>} />
-        <Route path='admin/productlist' element={<ProductListScreen/>} />
+        <Route path='admin/productlist' element={<ProductListScreen/>} exact />
+        <Route path='admin/productlist/:pagenumber' element={<ProductListScreen/>} exact />
         <Route path='admin/product/:id/edit' element={<ProductEditScreen/>} />
         <Route path='admin/orderlist' element={<OrderListScreen/>} />
      

@@ -1,10 +1,11 @@
 import React, {useState, useEffect} from 'react'
-import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom'
 import { Table, Row, Col, Button } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux' 
 // components 
 import Message from '../components/Message'
 import Loader from '../components/Loader'
+import Paginate from '../components/Paginate'
 // actions
 import { 
     listProducts,
@@ -20,13 +21,15 @@ const ProductListScreen = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const location = useLocation()
+    const params = useParams()
 
+    const pageNumber = params.pagenumber || 1
 
     const [msg, setMsg] = useState('')
     const gotMessage = location.search ? location.search.split('=')[1] : ''
 
     const productList = useSelector(state => state.productList)
-    const { loading, error, products } = productList
+    const { loading, error, products, pages, page } = productList
 
     const productDelete = useSelector(state => state.productDelete)
     const { loading:loadingDelete, error:errorDelete, success:successDelete } = productDelete
@@ -61,7 +64,7 @@ const ProductListScreen = () => {
         if (successCreate) {
             navigate(`/admin/product/${createdProduct._id}/edit`)
         } else {
-            dispatch(listProducts)
+            dispatch(listProducts('', pageNumber))
         }
 
         document.title = 'Product list'
@@ -71,7 +74,9 @@ const ProductListScreen = () => {
          navigate, 
          successDelete, 
          successCreate, 
-         createdProduct]) 
+         createdProduct,
+        pageNumber
+        ]) 
 
 const deleteHandler = (id) => {
     if(window.confirm('Are you sure?')) {
@@ -115,6 +120,7 @@ const createProductHandler = () => {
        {errorCreate && <Message variant='danger'>{errorCreate}</Message>}
 
         {loading ? <Loader /> : error ? <Message variant='danger'>{error}</Message> : (
+        <>
         <Table striped bordered hover responsive className='table table-sm'>
             <thead>
                 <tr>
@@ -154,6 +160,12 @@ const createProductHandler = () => {
 
             </tbody>
         </Table>
+        <Paginate
+        pages={pages} 
+        page={page}
+        isAdmin={true}
+        />
+        </>
         )}   
         </>
     )

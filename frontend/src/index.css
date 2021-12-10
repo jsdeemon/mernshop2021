@@ -56,6 +56,63 @@ header .fa-user:hover, .fa-shopping-cart:hover, .fa-arrow-alt-circle-right:hover
   margin-top: 10px;
 }
 
+
+.page-link {
+  color: #fff;
+  background: #000;
+  text-decoration: none;
+  margin: 3px;
+}
+
+.page-link:hover {
+background: orange;
+color: #fff;
+text-decoration: none;
+}
+
+.active {
+  background: gray;
+  color: #fff;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.paginate {
+  display: flex;
+  justify-content: center;
+}
+
+/* carousel */
+.carousel {
+  background: #000;
+}
+.carousel-item-next,
+.carousel-item-prev,
+.carousel-item-active {
+  display: flex;
+}
+
+.carousel-caption {
+  position: absolute;
+  top: 0;
+}
+
+.carousel-caption h2 {
+  color: #fff;
+}
+
+.carousel img {
+  height: 300px;
+  padding: 30px;
+  margin: 40px;
+  border-radius: 50%;
+}
+
+.carousel a {
+  margin: 0 auto;
+}
+
+
 /* .rating span {
   margin: 0.1rem;
 } */

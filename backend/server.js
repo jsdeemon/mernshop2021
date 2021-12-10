@@ -6,6 +6,7 @@ import dotenv from 'dotenv';
 import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 // colors
 import colors from 'colors';
+import morgan from 'morgan'
 // connecion to db
 import connectDB from './config/db.js';
 // routes
@@ -23,6 +24,12 @@ dotenv.config()
 connectDB();
 
 const app = express(); 
+
+// using morgan logger in development mode 
+if(process.env.NODE_ENV === 'development') {
+    app.use(morgan('dev'))
+}
+
 
 // adding body parser 
 app.use(express.json())

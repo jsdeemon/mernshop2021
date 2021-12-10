@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import {Row, Col} from 'react-bootstrap';
 import Product from '../components/Product';
 import Message from '../components/Message';
@@ -13,6 +13,9 @@ import { SUCCESS_REGISTER } from '../constants/messageConstants'
 // import products from '../products';
 
 const HomeScreen = () => {
+
+    const params = useParams()
+    const keyword = params.keyword
 
 // defining dispatch 
 const dispatch = useDispatch(); 
@@ -29,7 +32,7 @@ const [msg, setMsg] = useState('')
         if (redirect === SUCCESS_REGISTER) {
             setMsg('You successfully registered')
         }
-        dispatch(listProducts())
+        dispatch(listProducts(keyword))
 
         document.title = 'All products'
         // document.getElementsByTagName("META")[2].content="Your description about the page or site here to set dynamically";
@@ -39,7 +42,7 @@ const [msg, setMsg] = useState('')
     //        setProducts(data);
     //    }
     //    fetchPproducts();
-    }, [dispatch, redirect])
+    }, [dispatch, redirect, keyword])
 
   
 

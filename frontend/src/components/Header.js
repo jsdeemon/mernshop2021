@@ -6,11 +6,13 @@ import {Navbar,
   Button,
    Nav, 
    Container,
-   Dropdown 
+   Row,
+   Col 
   } from 'react-bootstrap';
-
+import SearchBox from './SearchBox'
 // actions
 import { logout } from '../actions/userActions';
+
 
 
 
@@ -55,6 +57,9 @@ const qtyAll = cartItems.reduce((acc, item) => acc + item.qty, 0)
           
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
+
+            <SearchBox />
+
             <Nav className="ms-auto">
            
                   {/* <Link to='/cart'>
@@ -73,15 +78,24 @@ const qtyAll = cartItems.reduce((acc, item) => acc + item.qty, 0)
 
   {userInfo && userInfo.isAdmin && (
                   <>
+                
+                 
                    <Link to='/admin/userlist'>
-                  <i className="fas fa-users"> Users</i> 
+                  <i className="fas fa-users"></i>  
                   </Link>
+                
+                 
                   <Link to='/admin/productlist'>
-                  <i className="fas fa-list"> Products</i> 
+                  <i className="fas fa-list"></i> 
                   </Link>
+                 
+             
                   <Link to='/admin/orderlist'>
-                  <i className="fas fa-list-alt"> Orders</i> 
+                  <i className="fas fa-list-alt"></i> 
                   </Link>
+                 
+                  
+             
                   </>
                   )}
 

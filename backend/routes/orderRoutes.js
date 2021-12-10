@@ -6,6 +6,7 @@ import {
     addOrderItems,
     getOrderById,
     updateOrderToPaid,
+    updateOrderToDelivered,
     getMyOrders,
     getOrders
  } from '../controllers/orderController.js';
@@ -19,6 +20,9 @@ import {
 
 // payment route - PayPal
 router.route('/:id/pay').put(protect, updateOrderToPaid)
+
+// update to delivered
+router.route('/:id/deliver').put(protect, admin, updateOrderToDelivered)
 
 // get all orders
 router.route('/myorders').get(protect, getMyOrders)

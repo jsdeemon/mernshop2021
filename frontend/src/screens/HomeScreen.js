@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation, useParams } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 import {Row, Col} from 'react-bootstrap';
 import Product from '../components/Product';
 import Message from '../components/Message';
@@ -51,7 +51,7 @@ const [msg, setMsg] = useState('')
     return (
         <>
         <Meta />
-        {!keyword && <ProductCarousel /> }
+        {!keyword ? <ProductCarousel /> : <Link to={'/'} className={'btn btn-light'}>Go Back</Link> }
           {msg && <Message variant='success'>{msg}</Message>}
             <h1>Latest Products</h1>
             {loading ? (

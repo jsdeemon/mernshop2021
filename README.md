@@ -2,12 +2,14 @@
 
 ### To install:
 
-```cd frontend
+```
+cd frontend
 npm install
 cd ..
-npm install```
-In the root folder create a .env file 
+npm install
+```
 
+In the root folder create a .env file 
 in .env file write follow: 
 
 NODE_ENV = development 

@@ -1,14 +1,11 @@
 ## MERN fullstack Shop 
 
 ### To install:
-cd frontend
 
+```cd frontend
 npm install
-
 cd ..
-
-npm install
-
+npm install```
 In the root folder create a .env file 
 
 in .env file write follow: 
